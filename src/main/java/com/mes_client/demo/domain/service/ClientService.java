@@ -29,6 +29,7 @@ public class ClientService {
     public ClientDto updateClient(Client client){
         clientDto.setId(client.getId());
         if (clientRepository.existsById(client.getId())) {
+            
             clientRepository.save(client);
         } else {
             

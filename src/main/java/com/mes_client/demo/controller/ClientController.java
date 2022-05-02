@@ -2,6 +2,8 @@ package com.mes_client.demo.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.mes_client.demo.domain.dto.ClientDto;
 import com.mes_client.demo.domain.entity.Client;
 import com.mes_client.demo.domain.service.ClientService;
@@ -30,23 +32,20 @@ public class ClientController {
     @Autowired
     private ClientService clientService;
 
-    @Autowired
-    private ClientDto clientDto;
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ClientDto saveClient(@RequestBody Client client) {
+    public ClientDto saveClient(@Valid @RequestBody Client client) {
         return clientService.saveClient(client);
     }
 
 
     @PutMapping
-    public ClientDto updatedClient(@RequestBody Client client){
+    public ClientDto updatedClient(@Valid @RequestBody Client client){
         return clientService.updateClient(client);
     }
 
     @DeleteMapping(value = "/{id}")
-    public ClientDto deleteClient(@PathVariable Long id){
+    public ClientDto deleteClient(@Valid @PathVariable Long id){
         return clientService.deleteClient(id);
     }
 
