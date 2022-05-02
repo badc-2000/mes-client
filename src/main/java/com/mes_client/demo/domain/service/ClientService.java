@@ -2,6 +2,7 @@ package com.mes_client.demo.domain.service;
 
 import java.util.List;
 
+import com.mes_client.demo.domain.dto.ClientDto;
 import com.mes_client.demo.domain.entity.Client;
 import com.mes_client.demo.domain.repository.ClientRepository;
 
@@ -14,8 +15,8 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class ClientService {
     
-
-    ///private Client client;
+    @Autowired
+    private ClientDto clientDto;
 
     @Autowired
     ClientRepository clientRepository;
@@ -25,26 +26,33 @@ public class ClientService {
         return listAllClients;
     }
 
-    public Client updateClient(Client client){
+    public ClientDto updateClient(Client client){
+        clientDto.setId(client.getId());
         if (clientRepository.existsById(client.getId())) {
-            return clientRepository.save(client);
-
+            clientRepository.save(client);
         } else {
             
         }
-        return client;
+        return clientDto;
     }
 
-    public Client saveClient(Client client) {
-        return clientRepository.save(client);
+    public ClientDto saveClient(Client client) {
+        clientRepository.save(client);
+        clientDto.setCpf(client.getCpf());
+        clientDto.setDatanascimento(client.getDatanascimento());
+        clientDto.setId(client.getId());
+        clientDto.setNome(client.getNome());
+        clientDto.setSexo(client.getSexo());
+        return clientDto;
     }
 
-    public Client deleteClient(Long id) {
+    public ClientDto deleteClient(Long id) {
+        clientDto.setId(id);
         if (clientRepository.existsById(id)) {
             clientRepository.deleteById(id);
         } else {
 
         }
-        return new Client();
+        return clientDto;
     }
 }
