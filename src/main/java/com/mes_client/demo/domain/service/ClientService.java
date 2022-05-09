@@ -29,7 +29,6 @@ public class ClientService {
     public ClientDto updateClient(Client client){
         clientDto.setId(client.getId());
         if (clientRepository.existsById(client.getId())) {
-            
             clientRepository.save(client);
         } else {
             
@@ -44,6 +43,7 @@ public class ClientService {
         clientDto.setId(client.getId());
         clientDto.setNome(client.getNome());
         clientDto.setSexo(client.getSexo());
+        clientDto.setEndereco(client.getEndereco());
         return clientDto;
     }
 
